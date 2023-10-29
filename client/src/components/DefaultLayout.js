@@ -16,10 +16,9 @@ import { useSelector } from "react-redux";
 const { Header, Sider, Content } = Layout;
 
 const DefaultLayout = (props) => {
-
   const [collapsed, setCollapsed] = useState(false);
   const { cartItems, loading } = useSelector((state) => state.rootReducer);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const toggle = () => {
     setCollapsed(!collapsed);
   };
@@ -32,16 +31,12 @@ const DefaultLayout = (props) => {
     <Layout>
       {loading && (
         <div className="spinner">
-          <div
-          class="spinner-border"
-          role="status"
-        >
-        </div>
+          <div className="spinner-border" role="status"></div>
         </div>
       )}
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
-          <h3>{collapsed ? 'SP' : 'SHEY POS'}</h3>
+          <h3>{collapsed ? "IP" : "Imran's Point of Sale Software"}</h3>
         </div>
         <Menu
           theme="dark"
@@ -63,10 +58,14 @@ const DefaultLayout = (props) => {
           <Menu.Item key="/customers" icon={<UserOutlined />}>
             <Link to="/customers">Customers</Link>
           </Menu.Item>
-          <Menu.Item key="/logout" icon={<LoginOutlined />} onClick={()=>{
-            localStorage.removeItem('pos-user')
-            navigate('/login')
-          }}>
+          <Menu.Item
+            key="/logout"
+            icon={<LoginOutlined />}
+            onClick={() => {
+              localStorage.removeItem("pos-user");
+              navigate("/login");
+            }}
+          >
             Logout
           </Menu.Item>
         </Menu>
@@ -96,7 +95,7 @@ const DefaultLayout = (props) => {
           style={{
             margin: "10px",
             padding: 24,
-            minHeight:'80vh'
+            minHeight: "80vh",
           }}
         >
           {props.children}

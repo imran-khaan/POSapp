@@ -42,31 +42,37 @@ function Homepage() {
 
   useEffect(() => {
     getAllItems();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <DefaultLayout>
-
       <div className="d-flex categories">
-            {categories.map((category)=>{
-              return <div 
-              onClick={()=>setSelectedCategoty(category.name)}
-              className={`d-flex category ${selectedCategory===category.name && 'selected-category'}`}>
-                      <h4>{category.name}</h4>
-                      <img src={category.imageURL} height='60' width='80' />
-              </div>
-            })}
+        {categories.map((category) => {
+          return (
+            <div
+              onClick={() => setSelectedCategoty(category.name)}
+              className={`d-flex category ${
+                selectedCategory === category.name && "selected-category"
+              }`}
+            >
+              <h4>{category.name}</h4>
+              <img src={category.imageURL} alt=" " height="60" width="80" />
+            </div>
+          );
+        })}
       </div>
 
       <Row gutter={20}>
-
-        {itemsData.filter((i)=>i.category===selectedCategory).map((item) => {
-          return (
-            <Col xs={24} lg={6} md={12} sm={6}>
-              <Item item={item} />
-            </Col>
-          );
-        })}
+        {itemsData
+          .filter((i) => i.category === selectedCategory)
+          .map((item) => {
+            return (
+              <Col xs={24} lg={6} md={12} sm={6}>
+                <Item item={item} />
+              </Col>
+            );
+          })}
       </Row>
     </DefaultLayout>
   );

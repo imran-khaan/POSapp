@@ -24,6 +24,7 @@ function Register() {
   };
   useEffect(() => {
     if (localStorage.getItem("pos-user")) navigate("/home");
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="authentication">

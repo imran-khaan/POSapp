@@ -27,15 +27,15 @@ function Items() {
   const deleteItem = (record) => {
     dispatch({ type: "showLoading" });
     axios
-      .post("/api/items/delete-item" , {itemId : record._id})
+      .post("/api/items/delete-item", { itemId: record._id })
       .then((response) => {
         dispatch({ type: "hideLoading" });
-        message.success('Item deleted successdully')
-        getAllItems()
+        message.success("Item deleted successdully");
+        getAllItems();
       })
       .catch((error) => {
         dispatch({ type: "hideLoading" });
-        message.error('Something went wrong')
+        message.error("Something went wrong");
         console.log(error);
       });
   };
@@ -72,7 +72,7 @@ function Items() {
               setAddEditModalVisibilty(true);
             }}
           />
-          <DeleteOutlined className="mx-2" onClick={()=>deleteItem(record)}/>
+          <DeleteOutlined className="mx-2" onClick={() => deleteItem(record)} />
         </div>
       ),
     },
@@ -80,42 +80,40 @@ function Items() {
 
   useEffect(() => {
     getAllItems();
+    // eslint-disable-next-line
   }, []);
 
   const onFinish = (values) => {
-
     dispatch({ type: "showLoading" });
-    if(editingItem===null)
-    {
+    if (editingItem === null) {
       axios
-      .post("/api/items/add-item", values)
-      .then((response) => {
-        dispatch({ type: "hideLoading" });
-        message.success("Item added successfully");
-        setAddEditModalVisibilty(false);
-        getAllItems();
-      })
-      .catch((error) => {
-        dispatch({ type: "hideLoading" });
-        message.error("Something went wrong");
-        console.log(error);
-      });
-    }
-    else{
+        .post("/api/items/add-item", values)
+        .then((response) => {
+          dispatch({ type: "hideLoading" });
+          message.success("Item added successfully");
+          setAddEditModalVisibilty(false);
+          getAllItems();
+        })
+        .catch((error) => {
+          dispatch({ type: "hideLoading" });
+          message.error("Something went wrong");
+          console.log(error);
+        });
+    } else {
       axios
-      .post("/api/items/edit-item", {...values , itemId : editingItem._id})
-      .then((response) => {
-        dispatch({ type: "hideLoading" });
-        message.success("Item edited successfully");
-        setEditingItem(null)
-        setAddEditModalVisibilty(false);
-        getAllItems();
-      })
-      .catch((error) => {
-        dispatch({ type: "hideLoading" });
-        message.error("Something went wrong");
-        console.log(error);
-      });
+        .post("/api/items/edit-item", { ...values, itemId: editingItem._id })
+        .then((response) => {
+          dispatch({ type: "hideLoading" });
+          message.success("Item edited successfully");
+          setEditingItem(null);
+          setAddEditModalVisibilty(false);
+          getAllItems();
+        })
+        .catch((error) => {
+          dispatch({ type: "hideLoading" });
+          message.error("Something went wrong");
+          console.log(error);
+        });
     }
   };
   return (
@@ -131,11 +129,11 @@ function Items() {
       {addEditModalVisibilty && (
         <Modal
           onCancel={() => {
-            setEditingItem(null)
-            setAddEditModalVisibilty(false)
+            setEditingItem(null);
+            setAddEditModalVisibilty(false);
           }}
           visible={addEditModalVisibilty}
-          title={`${editingItem !==null ? 'Edit Item' : 'Add New Item'}`}
+          title={`${editingItem !== null ? "Edit Item" : "Add New Item"}`}
           footer={false}
         >
           <Form

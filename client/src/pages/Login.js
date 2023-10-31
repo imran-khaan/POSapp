@@ -25,6 +25,7 @@ function Login() {
 
   useEffect(() => {
     if (localStorage.getItem("pos-user")) naviate("/home");
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
-import "antd/dist/antd.css";
-import { Button } from "antd";
+import "antd/dist/antd.min.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Items from "./pages/Items";
@@ -14,11 +12,46 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<ProtectedRoute><Homepage /></ProtectedRoute>} />
-          <Route path="/items" element={<ProtectedRoute><Items /></ProtectedRoute>} />
-          <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-          <Route path="/bills" element={<ProtectedRoute><Bills /></ProtectedRoute>} />
-          <Route path="/customers" element={<ProtectedRoute><Customers /></ProtectedRoute>} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Homepage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/items"
+            element={
+              <ProtectedRoute>
+                <Items />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bills"
+            element={
+              <ProtectedRoute>
+                <Bills />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute>
+                <Customers />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Login />} />
@@ -30,15 +63,10 @@ function App() {
 
 export default App;
 
-
-export function ProtectedRoute({children}){
-
-    if(localStorage.getItem('pos-user'))
-    {
-      return children
-    }
-    else{
-      return <Navigate to='/login' />
-    }
-
+export function ProtectedRoute({ children }) {
+  if (localStorage.getItem("pos-user")) {
+    return children;
+  } else {
+    return <Navigate to="/login" />;
+  }
 }

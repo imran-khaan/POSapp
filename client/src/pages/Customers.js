@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message, Modal, Select, Table } from "antd";
-import ReactToPrint from 'react-to-print';
-import { useReactToPrint } from 'react-to-print';
+import { Table } from "antd";
 function Customers() {
-    const componentRef = useRef();
+  // const componentRef = useRef();
   const [billsData, setBillsData] = useState([]);
 
   const dispatch = useDispatch();
@@ -17,8 +14,8 @@ function Customers() {
       .get("/api/bills/get-all-bills")
       .then((response) => {
         dispatch({ type: "hideLoading" });
-        const data = response.data
-        data.reverse()
+        const data = response.data;
+        data.reverse();
         setBillsData(data);
       })
       .catch((error) => {
@@ -39,18 +36,14 @@ function Customers() {
     {
       title: "Created On",
       dataIndex: "createdAt",
-      render :(value)=><span>{value.toString().substring(0,10)}</span>
+      render: (value) => <span>{value.toString().substring(0, 10)}</span>,
     },
-   
-    
   ];
- 
 
   useEffect(() => {
     getAllBills();
+    // eslint-disable-next-line
   }, []);
-
- 
 
   return (
     <DefaultLayout>
@@ -58,8 +51,6 @@ function Customers() {
         <h3>Customers</h3>
       </div>
       <Table columns={columns} dataSource={billsData} bordered />
-
-     
     </DefaultLayout>
   );
 }
